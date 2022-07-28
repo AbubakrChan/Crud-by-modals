@@ -1,3 +1,10 @@
+<p >About</p>
+<p >This repositry includes crud operations by modals using ajax.</p >
+<p >Bootstrap modals were used. Valiidations on input fields. </p >
+<p >This contain: </p >
+<p >Two modals( Update and Insert). </p >
+<p >Delte popup validation.</p >
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
