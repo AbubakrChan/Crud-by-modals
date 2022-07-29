@@ -69,7 +69,7 @@
                     <meta name="csrf-token" content="{{ csrf_token() }}">
                     <form  method="POST" >
                         @csrf
-                        <button type="button"  data-toggle="modal" class="btn btn-default"  data-target="#myModal{{$daata->id}}">Edit</button>
+                        <button type="button" id="edit" data-toggle="modal" class="btn btn-default"  data-target="#myModal{{$daata->id}}">Edit</button>
                         <!--  <button type="button" value="edit"  id="edit" name="edit"  >Edit</button>-->
                     </form>
                     <!--<input type="submit" value="Edit"  id="edit" name="edit"  />-->
@@ -345,6 +345,11 @@
         #delete{
             background: #e71313;
             color: whitesmoke;
+        }
+                #edit{
+            background: #25606b;
+            color: whitesmoke;
+
         }
     </style>
 
