@@ -43,6 +43,7 @@ $req->validate([
 
     }
     function edit(Request $req){
+
         $newuser = mymodel::find($req->id);
         $newuser->name = $req->name;
         $newuser->email = $req->email;
@@ -54,20 +55,15 @@ $req->validate([
        // return view('crudbymodalview');
 
     }
-
+    function  fetchstudent(){
+     $data =    mymodel::all();
+     return response()->json([
+        'daata'=>$data,
+     ]);
+    }
 }
 //    function insert(Response $req){
 //
 //
 //    }
 
-function unique_email_check($email){
-    $data = mymodel::all();
-    foreach ($data as $mydata) {
-        if ($mydata->email === $email){
-            echo "Email already exist!";
-            return false;
-        }
-    }
-    return true ;
-}
