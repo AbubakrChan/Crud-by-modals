@@ -16,12 +16,10 @@ use App\mymodel;
 Route::get('/', function () {
     return view('welcome');
 });
-//$data = mymodel::all();
 
 Route::view("home","crudbymodalview");
 Route::post('/myajax','Controller@insert');
 Route::post("/myajax1","Controller@delete");
 Route::post("/myajax2","Controller@edit");
+Route::GET("/myajax3","Controller@fetchstudent");
 
-//Route::post("home1","Controller@insert");
-//
