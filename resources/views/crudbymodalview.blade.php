@@ -12,6 +12,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+<script>
+    <?php
+        $data = \App\mymodel::all();
+        ?>
+   console.log(data);
+</script>
 
 <div class="container">
     <h2>Crud by Modal</h2>
@@ -32,13 +38,47 @@
 <script>
     i=0 ;
 </script>
+
+
+
+
         @foreach($data as $daata)
+            <script>function buildTable(data){
+                    <?php
+                    $data = \App\mymodel::all();
+                    ?>
+                    $('tbody').html("");
+                    var table = document.getElementById('myTable')
+                    for (var i = 0; i < data.length; i++){
+                        var row = `<tr>
+                                <td>${i+1}</td>
+							<td style="padding-left: 28px">${data[i].name}</td>
+							<td style="padding-left: 28px">${data[i].email}</td>
+                             <td style="padding-left: 28px"><button type="button"  value="delete"  id="delete" class="btn btn-default"  name="delete"  onclick="confirmDeleteModal(${data[i].id})" >Delete</button></td>\
+                             <td style="padding-left: 28px"><button type="button" id="edit"  data-toggle="modal" class="btn btn-default"  data-target="#myModal${data[i].id}">Edit</button></td>\
+
+					  </tr>`
+                        table.innerHTML += row
+
+
+                    }
+                }</script>
+
+
+
+
+
+
+
+            <tbody id="myTable">
             <tr>
+
                 <td>
                     <script>
                         i++;
                         document.write(i);
                     </script>
+
                 </td><td><div class="idbu">{{ $daata['name']}}</div></td><td><div class="idbu">{{$daata['email']}}</div></td><td>
 
                     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -56,6 +96,7 @@
                 </td>
 
             </tr>
+            </tbody>
             <div class="modal fade"  id="myModal{{$daata->id}}"   role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -101,6 +142,18 @@
                                         },
                                         success: function(dataResult) {
                                             $('#myModal{{$daata->id}}').modal('hide');
+                                            fetchstudent();
+                                            function fetchstudent(){
+                                                $.ajax({
+                                                    type:"GET",
+                                                    url:"/myajax3",
+                                                    datatype:"json",
+                                                    success: function (response){
+                                                        buildTable(response.daata);
+                                                    }
+
+                                                });
+                                            }
                                         }
                                     });
                                 });
@@ -129,6 +182,19 @@
                 },
                 success: function(dataResult) {
                     $('#deleteModal').modal('hide');
+                    fetchstudent();
+                    function fetchstudent(){
+                        $.ajax({
+                            type:"GET",
+                            url:"/myajax3",
+                            datatype:"json",
+                            success: function (response){
+                                buildTable(response.daata);
+                            }
+
+                        });
+                    }
+
                 }
             });
         }
@@ -191,6 +257,35 @@
             },
             success: function(){
                 $('#myModal').modal('hide');
+                    fetchstudent();
+                    function fetchstudent(){
+                    $.ajax({
+                    type:"GET",
+                    url:"/myajax3",
+                    datatype:"json",
+                    success: function (response){
+                        buildTable(response.daata);
+
+                    // $(response.daata,function (key,item){
+                        //$('tbody').html("");
+                    {{--    $('tbody').append('<tr>\--}}
+                    {{--<td>'+item.id+'</td>\--}}
+                    {{--<td>'+item.name+'</td>\--}}
+                    {{--<td>'+item.email+'</td>\--}}
+                    {{--<td>'+item.password+'</td>\--}}
+                    {{--<td><button type="button"  value="delete"  id="delete" class="btn btn-default"  name="delete"  onclick="confirmDeleteModal({{$daata['id']}})" >Delete</button></td>\--}}
+                    {{--<td><button type="button" id="edit"  data-toggle="modal" class="btn btn-default"  data-target="#myModal{{$daata->id}}">Edit</button></td>\--}}
+                    {{--<tr>');--}}
+
+
+                    // })
+
+                }
+
+                });
+                }
+
+
 
             },
             error: function (error){
@@ -240,6 +335,6 @@
             color: whitesmoke;
         }
     </style>
-<!------------------------------------------style end--------------------------------------------->
 
+<!------------------------------------------style end--------------------------------------------->
 
