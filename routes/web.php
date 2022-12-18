@@ -5,23 +5,30 @@
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
+| Here is where you can registzer web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
 */
 
-use App\mymodel;
+use App\student;
 
-Route::get('/', function () {
-    return view('welcome');
+//Route::get('/', function () {
+ //   return view('welcome');
+//});
+//Route::get('dropdown', [\App\Http\StudentControllers\StudentController::class, 'index']);
+
+
+Route::get("home","StudentController@index");
+Route::get("insertbuttononclick/{roll_no}","StudentController@create");
+Route::post('insert','StudentController@store');
+Route::get('delete/{id}','StudentController@destroy');
+Route::get('detail/{id}','StudentController@show');
+Route::get('edit/{id}','StudentController@edit');
+Route::post('update','StudentController@update');
+//Route::view('qr-code-g', 'resources/view/qrCode.blade.php');
+Route::get('qr-code-g', function () {
+   return view('qrCode');
 });
-//$data = mymodel::all();
+//Route::post('a','StudentController@update');
 
-Route::view("home","crudbymodalview");
-Route::post('/myajax','Controller@insert');
-Route::post("/myajax1","Controller@delete");
-Route::post("/myajax2","Controller@edit");
-
-//Route::post("home1","Controller@insert");
-//
